@@ -7,7 +7,7 @@ vector<bitset<8> > toBitset(string s){
 	vector<bitset<8> > bsVec;
 	for (std::size_t i = 0; i < s.size(); ++i){
       	bsVec.push_back(bitset<8>(s.c_str()[i]));
-  	    cout<<"bitset= "<<bsVec[i]<<endl;
+  	    // cout<<"bitset= "<<bsVec[i]<<endl;
     }
     
   	return bsVec;
