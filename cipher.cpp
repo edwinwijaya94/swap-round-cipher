@@ -74,3 +74,55 @@ string rightShift(string s){
 	
 	return res;
 }
+
+vector<vector<bitset<16> > > permute(vector<vector<bitset<8> > > upaBlock){
+	string tempString = "";
+	vector<bitset<16>> tempVectorBitset;
+	vector<vector<bitset<16> > > tempVector;
+
+	for(int i=0;i<upaBlock.size();i++){
+		for(int j=0;j<upaBlock[i].size();j++){
+			tempString += upaBlock[i][j].to_string();
+		}
+		tempString = rightShift(tempString);
+		tempString = leftShift(tempString.substr(0,8)) + leftShift(tempString.substr(8,8));
+		tempString = rightShift(tempString.substr(0,4)) + rightShift(tempString.substr(4,4)) + rightShift(tempString.substr(8,4)) + rightShift(tempString.substr(12,4));
+		tempString = leftShift(tempString.substr(0,2)) + leftShift(tempString.substr(2,2)) + leftShift(tempString.substr(4,2)) + leftShift(tempString.substr(6,2)) + leftShift(tempString.substr(8,2)) + leftShift(tempString.substr(10,2)) + leftShift(tempString.substr(12,2)) + leftShift(tempString.substr(14,2));
+		
+		bitset<16> tempBitset(tempString);
+		
+		tempVectorBitset.push_back(tempBitset);
+		tempVector.push_back(tempVectorBitset);
+
+		tempVectorBitset.clear();
+		tempString = "";
+	}
+
+	return tempVector;
+}
+
+vector<vector<bitset<16> > > reversePermute(vector<vector<bitset<16> > > permuteMessage){
+	string tempString = "";
+	vector<bitset<16>> tempVectorBitset;
+	vector<vector<bitset<16> > > tempVector;
+
+	for(int i=0;i<permuteMessage.size();i++){
+		for(int j=0;j<permuteMessage[i].size();j++){
+			tempString = permuteMessage[i][j].to_string();
+			tempString = rightShift(tempString.substr(0,2)) + rightShift(tempString.substr(2,2)) + rightShift(tempString.substr(4,2)) + rightShift(tempString.substr(6,2)) + rightShift(tempString.substr(8,2)) + rightShift(tempString.substr(10,2)) + rightShift(tempString.substr(12,2)) + rightShift(tempString.substr(14,2));
+			tempString = leftShift(tempString.substr(0,4)) + leftShift(tempString.substr(4,4)) + leftShift(tempString.substr(8,4)) + leftShift(tempString.substr(12,4));
+			tempString = rightShift(tempString.substr(0,8)) + rightShift(tempString.substr(8,8));
+			tempString = leftShift(tempString);
+			
+			bitset<16> tempBitset(tempString);
+			
+			tempVectorBitset.push_back(tempBitset);
+			tempVector.push_back(tempVectorBitset);
+
+			tempVectorBitset.clear();
+			tempString = "";
+		}
+	}
+
+	return tempVector;
+}
