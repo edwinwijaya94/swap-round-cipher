@@ -4,12 +4,28 @@
 #include "keyGenerator.h"
 #include "cipher.h"
 
-
 using namespace std;
+
+bitset<16> roundFunction(bitset<16> ri, vector<bool> internalKey){
+	bitset<16> res;
+
+	// xor ri dengan kunci internal
+	for(int i=0;i<16;i++){
+		res[i] = ri[i] ^ internalKey[15-i];
+	}
+
+	return res;
+}
+
+vector<bitset<16> > doFeistel(bitset<16> li, bitset<16> ri, vector<bool> internalKey){
+	bitset<16> tempRi;
+	bitset<16> tempLi;
+
+}
 
 int main(){
 	string s = "kriptografitubes";
-	// vector<vector<bool> > res = getInternalKeys(s);
+	vector<vector<bool> > res = getInternalKeys(s);
 	// for(int i=0; i<res.size(); i++){
 	// 	for(int j=0; j<res[i].size(); j++)
 	// 		cout<<res[i][j];
@@ -21,6 +37,7 @@ int main(){
 	vector<vector<bitset<8> > >  mainUpaBlockMessage;
 	vector<vector<bitset<16> > > mainPermuteMessage;
 	vector<vector<bitset<16> > > mainReversePermuteMessage;
+	bitset<16> resultRoundFunction;
 
 	// getline(cin, message);
 
@@ -33,6 +50,12 @@ int main(){
 	mainUpaBlockMessage = toUpaBlockMessage(mainBlockMessage);
 	mainPermuteMessage = permute(mainUpaBlockMessage);
 	mainReversePermuteMessage = reversePermute(mainPermuteMessage);
+
+	resultRoundFunction = roundFunction(mainPermuteMessage[0][0],res[7]);
+
+	cout << "message permute = " << mainPermuteMessage[0][0] << endl;
+	print(res[7]);
+	cout << "round function = " << resultRoundFunction << endl;
 
 	//print block message
 	for(int i=0;i<mainBlockMessage.size();i++){
