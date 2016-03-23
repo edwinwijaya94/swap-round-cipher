@@ -32,15 +32,15 @@ vector<vector<vector<bool> > > putBsMat(vector<bitset<8> > bsVec){
     }
 
   	for(int i=0; i<8; i++){
-  		cout<<"Mat "<<i<<endl;
+  		//cout<<"Mat "<<i<<endl;
       for(int j=0; j<16; j++){
   			M[i][j/4][j%4] = bsVec[j][7-i];
-        cout<<M[i][j/4][j%4];
-        if(!((j+1)%4))
-          cout<<endl;
+        //cout<<M[i][j/4][j%4];
+        // if(!((j+1)%4))
+        //   cout<<endl;
   		}
   	}
-    //printf("putbsmat");
+    // printf("putbsmat");
   	return M;
 }
 
@@ -105,28 +105,28 @@ vector<vector<bool> > getInternalKeys(string key){
   vector<vector<bool> > intKeys;
 
   for(int i=0; i<8; i++){
-    printf("Mat %d\n",i);
-    printMat(M[i]);
+    // printf("Mat %d\n",i);
+    // printMat(M[i]);
 
   	for(int j=0; j<2; j++){
       //do XOR (STEP 3)
     	vector<bool> subkey1 = doXOR(M[i]);
-      printf("subkey1= ");
-      print(subkey1);
+      // printf("subkey1= ");
+      // print(subkey1);
       // do round (STEP 4)
       M[i] = doRound(M[i]);
 
       //(STEP 5)    
       vector<bool> subkey2 = doXOR(M[i]);
-      printf("subkey2= ");
-      print(subkey2);
+      // printf("subkey2= ");
+      // print(subkey2);
 
       vector<bool>key;
       key.insert(key.end(), subkey1.begin(), subkey1.end());
       key.insert(key.end(), subkey2.begin(), subkey2.end());
 
-      printf("key= ");
-      print(key);
+      // printf("key= ");
+      // print(key);
       
       intKeys.push_back(key);
 
